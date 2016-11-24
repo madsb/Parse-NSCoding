@@ -7,6 +7,7 @@
 //
 
 #import "PFObject+NSCoding.h"
+#import "PFObjectPrivate.h"
 #import "NSObject+Properties.h"
 
 @implementation PFObject (NSCoding)
