@@ -7,7 +7,6 @@
 //
 
 #import "PFObject+NSCoding.h"
-#import "PFObjectPrivate.h"
 #import "NSObject+Properties.h"
 
 @implementation PFObject (NSCoding)
@@ -72,9 +71,7 @@
 		//Deserialize all non-nil Parse properties
 		for (NSString* key in allKeys) {
             id obj = [aDecoder decodeObjectForKey:key];
-            if (obj) {
-                self[key] = obj;
-            }
+			self[key] = obj;
 		}
 		
 		//Deserialize all nil Parse properties with NSNull

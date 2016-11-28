@@ -22,7 +22,7 @@
 	NSDictionary* properties = [self properties];
 	for (NSString* key in properties) {
 		NSArray* attributes = properties[key][@"attributes"];
-		if ([attributes containsObject:@"D"] && ![attributes containsObject:@"C"]) {
+		if ([attributes containsObject:@"D"]) {
 			output[key] = properties[key];
 		}
 	}
