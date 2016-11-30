@@ -7,8 +7,8 @@
 //
 
 #import "PFObject+NSCoding.h"
-#import "NSObject+Properties.h"
 #import "PFObjectPrivate.h"
+#import "NSObject+Properties.h"
 
 @implementation PFObject (NSCoding)
 
@@ -66,13 +66,15 @@
 	if (self) {
 		
 		//Deserialize Parse timestamps
-		self.createdAt = [aDecoder decodeObjectForKey:kPFObjectCreatedAtKey];
-		self.updatedAt = [aDecoder decodeObjectForKey:kPFObjectUpdatedAtKey];
+//        [self setValue:[aDecoder decodeObjectForKey:kPFObjectCreatedAtKey] forKey:@"createdAt"];
+//        [self setValue:[aDecoder decodeObjectForKey:kPFObjectUpdatedAtKey] forKey:@"updatedAt"];
 		
 		//Deserialize all non-nil Parse properties
 		for (NSString* key in allKeys) {
             id obj = [aDecoder decodeObjectForKey:key];
-			self[key] = obj;
+            if (obj) {
+                self[key] = obj;
+            }
 		}
 		
 		//Deserialize all nil Parse properties with NSNull
@@ -87,7 +89,7 @@
 		
 		//Deserialize all non-Parse properties
 		NSDictionary* nonParseProperties = [self nonDynamicProperties];
-		[self decodeProperties:nonParseProperties withCoder:aDecoder];
+		//[self decodeProperties:nonParseProperties withCoder:aDecoder];
     }
 	
 	//Mark PFObject as not dirty
@@ -96,6 +98,8 @@
 	//Mark PFObject with same hasBeenFetched value as before encoding
 	[self setValue:@(isDataAvailable) forKey:kPFObjectIsDataAvailableKey];
 	
+    NSLog(@"Initialized object %@", self);
+    
     return self;
 }
 
