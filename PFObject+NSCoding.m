@@ -30,7 +30,13 @@
 	//[self allKeys] returns only the @dynamic properties that are not nil
 	for (NSString* key in [self allKeys]) {
 		id value = self[key];
-		[encoder encodeObject:value forKey:key];
+        if (![value isMemberOfClass:[PFRelation class]]) {
+            [encoder encodeObject:value forKey:key];
+        }
+        else
+        {
+            NSLog(@"**** WARNING! ****\n You tried to persist a PFRelation. This is unsupported in this NSCoding implementation.");
+        }
 	}
 }
 
