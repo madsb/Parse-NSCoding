@@ -24,6 +24,7 @@
 
 - (void)encodeWithCoder:(NSCoder*)encoder
 {
+  NSLog(@"**** ENCODING! ****\n %@", self);
 	//Serialize Parse-specific values
 	[encoder encodeObject:[self objectId] forKey:kPFObjectObjectId];
 	[encoder encodeObject:[self parseClassName] forKey:kPFObjectClassName];
